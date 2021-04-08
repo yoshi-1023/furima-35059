@@ -36,49 +36,55 @@ RSpec.describe Item, type: :model do
       end
 
       it 'categoryが未設定だと出品できない' do
-        @item.category_id = '1'
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category Select")
       end
 
       it 'product_statusが未設定だと出品できない' do
-        @item.product_status_id = '1'
+        @item.product_status_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Product status Select")
       end
 
       it 'shipping_chargesが未設定だと出品できない' do
-        @item.shipping_charges_id = '1'
+        @item.shipping_charges_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping charges Select")
       end
 
       it 'prefecturesが未設定だと出品できない' do
-        @item.prefectures_id = '1'
+        @item.prefectures_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Prefectures Select")
       end
 
       it 'shipping_dateが未設定だと出品できない' do
-        @item.shipping_date_id = '1'
+        @item.shipping_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Shipping date Select")
       end
 
       it 'priceが空だと出品できない' do
-        @item.price = ''
+        @item.price = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
       it 'priceが全角数字だと出品できない' do
-        @item.price = '２００'
+        @item.price = '３００'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Half-width number")
       end
 
-      it 'priceが300~9999999のみ' do
-        @item.price = '20'
+      it 'priceが300~9999999のみ(300未満だとは登録できない)' do
+        @item.price = 20
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price Out of setting range")
+      end
+
+      it 'priceが300~9999999のみ(10000000以上だと登録できない)' do
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price Out of setting range")
       end
