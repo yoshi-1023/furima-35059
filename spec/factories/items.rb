@@ -9,13 +9,5 @@ FactoryBot.define do
     shipping_date_id {'2'}
     price {'40000'}
     association :user  
-    
-    trait :image do
-      after(:build) do |item|
-        File.open("#{Rails.root}/spec/fixtures/test1.jpeg") do |f|
-          item.images.attach(io: f, filename: "Unknown.jpeg", content_type: 'image/jpeg')
-        end
-      end
-    end
   end
 end
