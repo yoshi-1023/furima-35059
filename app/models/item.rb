@@ -4,8 +4,8 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :product_status
-  belongs_to :Shipping_charges
-  belongs_to :Prefectures
+  belongs_to :shipping_charges
+  belongs_to :prefectures
   belongs_to :shipping_date
 
   with_options presence: true do
