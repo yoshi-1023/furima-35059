@@ -18,6 +18,11 @@ RSpec.describe OrderShipping, type: :model do
         @order_shipping.building_name = ''
         expect(@order_shipping).to be_valid
       end
+
+      it 'phone_numberが10桁でも保存できること' do
+        @order_shipping.phone_number = '0901234567'
+        expect(@order_shipping).to be_valid
+      end
     end
 
     context '商品の購入記録がされない時' do
@@ -81,8 +86,8 @@ RSpec.describe OrderShipping, type: :model do
         expect(@order_shipping.errors.full_messages).to include("Phone number Input only number")
       end
 
-      it 'phone_numberが11桁より少ないと保存できないこと' do
-        @order_shipping.phone_number = '0901234567'
+      it 'phone_numberが10桁より少ないと保存できないこと' do
+        @order_shipping.phone_number = '090123456'
         @order_shipping.valid?
         expect(@order_shipping.errors.full_messages).to include("Phone number Input only number")
       end
