@@ -56,7 +56,7 @@ has_one :shipping_address
 |address          |string     |null: false       |
 |building_name    |string     |                  |
 |phone_number     |integer    |null: false       |
-|shipping_address |references |foreign_key: true |
+|purchase_record  |references |foreign_key: true |
 
 ### Association
 belongs_to :purchase_record
